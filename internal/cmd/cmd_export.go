@@ -89,7 +89,7 @@ func exportCommand(currentEnv Env, args []string, config *Config) (err error) {
 		}
 	}
 
-	if out := diffStatus(previousEnv.Diff(newEnv)); out != "" {
+	if out, hideDiff := diffStatus(previousEnv.Diff(newEnv)), newEnv[DIRENV_HIDE_DIFF]; out != "" && hideDiff != "1" {
 		logStatus(currentEnv, "export %s", out)
 	}
 
